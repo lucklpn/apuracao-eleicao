@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api-tse/:path*", "destination": "https://resultados.tse.jus.br/:path*" }
+  ]
+}

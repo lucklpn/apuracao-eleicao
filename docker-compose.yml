@@ -1,0 +1,18 @@
+services:
+  apuracao-votos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apuracao-tse
+    restart: unless-stopped
+    ports:
+      # Mapeia a porta 8080 do host (VPS) para a porta 80 interna do container
+      # O Apache 2 da VPS fará o ProxyPass para http://127.0.0.1:8080
+      - "127.0.0.1:8080:80"
+    environment:
+      - NODE_ENV=production
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
