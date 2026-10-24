@@ -32,12 +32,15 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
             : 'border-slate-200 dark:border-slate-800',
       )}
     >
+      {/* Colocação */}
       <span className="w-5 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-600 sm:w-6 sm:text-sm dark:text-slate-300">
         {rank}º
       </span>
+
+      {/* Avatar / Foto */}
       {imgError ? (
         <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-700 sm:h-14 sm:w-14 sm:text-sm dark:bg-slate-700 dark:text-slate-100"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-700 sm:h-14 sm:w-14 sm:text-sm dark:bg-slate-700 dark:text-slate-100"
           aria-hidden
         >
           {initials(name)}
@@ -48,9 +51,11 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
           alt={`Foto de ${name}`}
           loading="lazy"
           onError={() => setImgError(true)}
-          className="h-11 w-11 shrink-0 rounded-full bg-slate-200 object-cover sm:h-14 sm:w-14"
+          className="h-10 w-10 shrink-0 rounded-full bg-slate-200 object-cover sm:h-14 sm:w-14"
         />
       )}
+
+      {/* Dados do Candidato e Barra de Progresso */}
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <h3 className="truncate text-xs font-semibold sm:text-base">{name}</h3>
@@ -75,9 +80,11 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
           />
         </div>
       </div>
-      <div className="shrink-0 text-right">
+
+      {/* Votos e Porcentagem - Largura fixa/garantida para não vazar a tela */}
+      <div className="w-20 shrink-0 text-right sm:w-28">
         <p className="text-sm font-bold tabular-nums sm:text-lg">{formatPercent(c.pvap)}</p>
-        <p className="text-[10px] tabular-nums text-slate-600 sm:text-xs dark:text-slate-300">{formatInt(c.vap)} votos</p>
+        <p className="truncate text-[10px] tabular-nums text-slate-600 sm:text-xs dark:text-slate-300">{formatInt(c.vap)} votos</p>
       </div>
     </li>
   );
