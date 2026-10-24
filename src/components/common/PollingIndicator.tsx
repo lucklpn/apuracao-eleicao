@@ -22,41 +22,46 @@ export function PollingIndicator({
 }: Props) {
   const time = dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleTimeString('pt-BR') : '—';
   return (
-    <div className="flex flex-wrap items-end gap-3" role="status" aria-live="polite">
-      <div className="flex items-center gap-2 text-sm">
+    <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-end sm:justify-between" role="status" aria-live="polite">
+      <div className="flex items-center gap-2 text-xs sm:text-sm">
         {isFetching ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin text-blue-700 dark:text-blue-400" aria-hidden />
-            <span>Sincronizando…</span>
+            <Loader2 className="h-4 w-4 shrink-0 animate-spin text-blue-700 dark:text-blue-400" aria-hidden />
+            <span className="truncate">Sincronizando…</span>
           </>
         ) : isError ? (
           <>
-            <AlertTriangle className="h-4 w-4 text-amber-700 dark:text-amber-400" aria-hidden />
-            <span>Falha na última sincronização ({time})</span>
+            <AlertTriangle className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-400" aria-hidden />
+            <span className="truncate">Falha na última sincronização ({time})</span>
           </>
         ) : (
           <>
-            <CheckCircle2 className="h-4 w-4 text-green-700 dark:text-green-400" aria-hidden />
-            <span>Atualizado às {time}</span>
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
+            <span className="truncate">Atualizado às {time}</span>
           </>
         )}
       </div>
-      <Select
-        label="Atualização automática"
-        value={interval}
-        onChange={(e) => onIntervalChange(Number(e.target.value))}
-        className="py-1.5"
-      >
-        {POLLING_OPTIONS.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </Select>
-      <Button onClick={onRefresh} disabled={isFetching}>
-        <RefreshCw className={isFetching ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} aria-hidden />
-        Atualizar agora
-      </Button>
+
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
+        <div className="w-full sm:w-44">
+          <Select
+            label="Atualização automática"
+            value={interval}
+            onChange={(e) => onIntervalChange(Number(e.target.value))}
+            className="py-1.5 text-xs sm:text-sm"
+          >
+            {POLLING_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <Button onClick={onRefresh} disabled={isFetching} className="w-full sm:w-auto shrink-0 py-2">
+          <RefreshCw className={isFetching ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} aria-hidden />
+          <span>Atualizar agora</span>
+        </Button>
+      </div>
     </div>
   );
 }

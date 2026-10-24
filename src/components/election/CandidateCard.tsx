@@ -24,7 +24,7 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
   return (
     <li
       className={cn(
-        'flex items-center gap-3 rounded-lg border bg-white p-3 shadow-sm dark:bg-slate-900',
+        'flex items-center gap-2 rounded-lg border bg-white p-2.5 shadow-sm sm:gap-3 sm:p-3 dark:bg-slate-900',
         status === 'E'
           ? 'border-green-600 ring-1 ring-green-600'
           : status === '2T'
@@ -32,12 +32,12 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
             : 'border-slate-200 dark:border-slate-800',
       )}
     >
-      <span className="w-6 text-center text-sm font-semibold tabular-nums text-slate-600 dark:text-slate-300">
+      <span className="w-5 shrink-0 text-center text-xs font-semibold tabular-nums text-slate-600 sm:w-6 sm:text-sm dark:text-slate-300">
         {rank}º
       </span>
       {imgError ? (
         <div
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-200 text-sm font-bold text-slate-700 dark:bg-slate-700 dark:text-slate-100"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-700 sm:h-14 sm:w-14 sm:text-sm dark:bg-slate-700 dark:text-slate-100"
           aria-hidden
         >
           {initials(name)}
@@ -48,25 +48,25 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
           alt={`Foto de ${name}`}
           loading="lazy"
           onError={() => setImgError(true)}
-          className="h-14 w-14 shrink-0 rounded-full bg-slate-200 object-cover"
+          className="h-11 w-11 shrink-0 rounded-full bg-slate-200 object-cover sm:h-14 sm:w-14"
         />
       )}
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="truncate font-semibold">{name}</h3>
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+          <h3 className="truncate text-xs font-semibold sm:text-base">{name}</h3>
           {status === 'E' && (
-            <span className="rounded bg-green-700 px-1.5 py-0.5 text-xs font-bold text-white">Eleito</span>
+            <span className="rounded bg-green-700 px-1.5 py-0.5 text-[10px] font-bold text-white sm:text-xs">Eleito</span>
           )}
           {status === '2T' && (
-            <span className="rounded bg-amber-700 px-1.5 py-0.5 text-xs font-bold text-white">2º turno</span>
+            <span className="rounded bg-amber-700 px-1.5 py-0.5 text-[10px] font-bold text-white sm:text-xs">2º turno</span>
           )}
         </div>
-        <p className="truncate text-xs text-slate-600 dark:text-slate-300">
+        <p className="truncate text-[11px] text-slate-600 sm:text-xs dark:text-slate-300">
           Nº {c.n} · {c.cc}
           {c.nv ? ` · Vice: ${c.nv}` : ''}
         </p>
         <div
-          className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+          className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-200 sm:h-2 dark:bg-slate-700"
           role="presentation"
         >
           <div
@@ -75,9 +75,9 @@ export function CandidateCard({ candidate: c, rank, photo }: Props) {
           />
         </div>
       </div>
-      <div className="text-right">
-        <p className="text-lg font-bold tabular-nums">{formatPercent(c.pvap)}</p>
-        <p className="text-xs tabular-nums text-slate-600 dark:text-slate-300">{formatInt(c.vap)} votos</p>
+      <div className="shrink-0 text-right">
+        <p className="text-sm font-bold tabular-nums sm:text-lg">{formatPercent(c.pvap)}</p>
+        <p className="text-[10px] tabular-nums text-slate-600 sm:text-xs dark:text-slate-300">{formatInt(c.vap)} votos</p>
       </div>
     </li>
   );

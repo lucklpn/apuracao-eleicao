@@ -8,10 +8,10 @@ export function ProgressOverview({ data }: { data: TSEResultsResponse }) {
   const validos = parseNumber(data.vnom);
   return (
     <section aria-label="Resumo da apuração" className="space-y-3">
-      <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-medium text-slate-600 dark:text-slate-300">Seções apuradas</h2>
-          <span className="text-2xl font-bold tabular-nums">{formatPercent(data.pst)}</span>
+      <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm sm:p-4 dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex items-baseline justify-between gap-2">
+          <h2 className="text-xs font-medium text-slate-600 sm:text-sm dark:text-slate-300">Seções apuradas</h2>
+          <span className="text-xl font-bold tabular-nums sm:text-2xl">{formatPercent(data.pst)}</span>
         </div>
         <div
           className="mt-2 h-3 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
@@ -23,11 +23,11 @@ export function ProgressOverview({ data }: { data: TSEResultsResponse }) {
         >
           <div className="h-full bg-blue-700 transition-all dark:bg-blue-500" style={{ width: `${pct}%` }} />
         </div>
-        <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
+        <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-400">
           {formatInt(data.st)} de {formatInt(data.s)} seções · gerado em {data.dt} {data.hg}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
         <MetricCard title="Votos válidos" value={formatInt(validos)} icon={<Users className="h-4 w-4" aria-hidden />} />
         <MetricCard
           title="Brancos"
